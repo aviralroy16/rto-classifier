@@ -1,3 +1,29 @@
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+import joblib
+import pandas as pd
+import re
+from pydantic import BaseModel
+
+app = FastAPI(
+    title="RTO Risk Classifier API",
+    description=(
+        "Real-time COD RTO risk scoring engine preserving Colab pipeline"
+        " integrity"
+    ),
+    version="1.0",
+)
+
+# Enable CORS for all origins (so any frontend can talk to it)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ... (keep the rest of your existing code below)
 import joblib
 import pandas as pd
 import re
